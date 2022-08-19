@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import MySQLdb
 import config
+from models.experience import Experience
 from models.profile import Profile
 
 app = Flask(__name__)
@@ -33,7 +34,17 @@ def main():
         result[12]
     )
 
-    return render_template("index.html", data={"profile": profile})
+    len = cur.execute("SELECT * FROM experiences ORDER BY id ASC")
+    result = cur.fetchall()
+
+    expriences = []
+
+    for r in result:
+        exp = Experience()
+        exp.create_data(r[1], r[2], r[3], r[4], r[5], r[6])
+        expriences.append(exp)
+
+    return render_template("index.html", data={"profile": profile, "experiences": expriences})
 
 
 if __name__ == "__main__":
