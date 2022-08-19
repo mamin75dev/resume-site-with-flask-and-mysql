@@ -22,8 +22,8 @@ CREATE TABLE `personal_site`.`experiences` (
   `title` VARCHAR(100) NULL,
   `company_name` VARCHAR(100) NULL,
   `company_site` VARCHAR(200) NULL,
-  `start_date` DATETIME NULL,
-  `end_date` DATETIME NULL,
+  `start_date` VARCHAR(20) NULL,
+  `end_date` VARCHAR(20) NULL,
   `description` TEXT(2000) NULL,
   PRIMARY KEY (`id`)
 );
