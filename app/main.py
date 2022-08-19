@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 import MySQLdb
 import config
-from models.experience import Experience
 from models.profile import Profile
+from models.experience import Experience
+from models.education import Education
 
 app = Flask(__name__)
 
@@ -44,7 +45,17 @@ def main():
         exp.create_data(r[1], r[2], r[3], r[4], r[5], r[6])
         expriences.append(exp)
 
-    return render_template("index.html", data={"profile": profile, "experiences": expriences})
+    len = cur.execute("SELECT * FROM educations ORDER BY id ASC")
+    result = cur.fetchall()
+
+    educations = []
+
+    for r in result:
+        edu = Education()
+        edu.create_data(r[1], r[2], r[3], r[4], r[5], r[6])
+        educations.append(edu)
+
+    return render_template("index.html", data={"profile": profile, "experiences": expriences, "educations": educations})
 
 
 if __name__ == "__main__":
