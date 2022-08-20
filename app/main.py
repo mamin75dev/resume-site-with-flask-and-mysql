@@ -56,6 +56,7 @@ def main():
         educations.append(edu)
 
     return render_template("index.html", data={"profile": profile, "experiences": expriences, "educations": educations})
+    # return render_template("index.html")
 
 
 if __name__ == "__main__":
