@@ -4,6 +4,7 @@ import config
 from models.profile import Profile
 from models.experience import Experience
 from models.education import Education
+from models.skill import Skill
 
 app = Flask(__name__)
 
@@ -55,7 +56,17 @@ def main():
         edu.create_data(r[1], r[2], r[3], r[4], r[5], r[6])
         educations.append(edu)
 
-    return render_template("index.html", data={"profile": profile, "experiences": expriences, "educations": educations})
+    len = cur.execute("SELECT * FROM skills ORDER BY point DESC")
+    result = cur.fetchall()
+
+    skills = []
+
+    for r in result:
+        skill = Skill()
+        skill.create_data(r[1], r[2], r[3])
+        skills.append(skill)
+
+    return render_template("index.html", data={"profile": profile, "experiences": expriences, "educations": educations, "skills": skills})
     # return render_template("index.html")
 
 

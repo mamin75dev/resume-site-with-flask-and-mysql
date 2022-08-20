@@ -172,7 +172,7 @@
                                             <div class="col-sm-6 col-md-5">
                                                 <div class="about-img">
                                                     <img
-                                                        src="img/testimonial-2.jpg"
+                                                        src="static/img/testimonial-2.jpg"
                                                         class="img-fluid rounded b-shadow-a"
                                                         alt=""
                                                     />
@@ -185,8 +185,8 @@
                                                             >Name:
                                                         </span>
                                                         <span
-                                                            >Morgan
-                                                            Freeman</span
+                                                            >{{data.profile.first_name}}
+                                                            {{data.profile.last_name}}</span
                                                         >
                                                     </p>
                                                     <p>
@@ -194,8 +194,8 @@
                                                             >Profile:
                                                         </span>
                                                         <span
-                                                            >full stack
-                                                            developer</span
+                                                            >Mobile
+                                                            Developer</span
                                                         >
                                                     </p>
                                                     <p>
@@ -203,7 +203,7 @@
                                                             >Email:
                                                         </span>
                                                         <span
-                                                            >contact@example.com</span
+                                                            >{{data.profile.email}}</span
                                                         >
                                                     </p>
                                                     <p>
@@ -211,8 +211,7 @@
                                                             >Phone:
                                                         </span>
                                                         <span
-                                                            >(617)
-                                                            557-0089</span
+                                                            >{{data.profile.phone_number}}</span
                                                         >
                                                     </p>
                                                 </div>
@@ -220,54 +219,22 @@
                                         </div>
                                         <div class="skill-mf">
                                             <p class="title-s">Skill</p>
-                                            <span>HTML</span>
-                                            <span class="pull-right">85%</span>
+                                            {% for skill in data.skills %}
+                                            <span>{{skill.title}}</span>
+                                            <span class="pull-right"
+                                                >{{skill.point}}%</span
+                                            >
                                             <div class="progress">
                                                 <div
                                                     class="progress-bar"
                                                     role="progressbar"
-                                                    style="width: 85%"
-                                                    aria-valuenow="85"
+                                                    style="width: {{skill.point}}%"
+                                                    aria-valuenow="{{skill.point}}"
                                                     aria-valuemin="0"
                                                     aria-valuemax="100"
                                                 ></div>
                                             </div>
-                                            <span>CSS3</span>
-                                            <span class="pull-right">75%</span>
-                                            <div class="progress">
-                                                <div
-                                                    class="progress-bar"
-                                                    role="progressbar"
-                                                    style="width: 75%"
-                                                    aria-valuenow="75"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100"
-                                                ></div>
-                                            </div>
-                                            <span>PHP</span>
-                                            <span class="pull-right">50%</span>
-                                            <div class="progress">
-                                                <div
-                                                    class="progress-bar"
-                                                    role="progressbar"
-                                                    style="width: 50%"
-                                                    aria-valuenow="50"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100"
-                                                ></div>
-                                            </div>
-                                            <span>JAVASCRIPT</span>
-                                            <span class="pull-right">90%</span>
-                                            <div class="progress">
-                                                <div
-                                                    class="progress-bar"
-                                                    role="progressbar"
-                                                    style="width: 90%"
-                                                    aria-valuenow="90"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100"
-                                                ></div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -278,17 +245,9 @@
                                                 </h5>
                                             </div>
                                             <p class="lead">
-                                                Curabitur non nulla sit amet
-                                                nisl tempus convallis quis ac
-                                                lectus. Curabitur arcu erat,
-                                                accumsan id imperdiet et,
-                                                porttitor at sem. Praesent
-                                                sapien massa, convallis a
-                                                pellentesque nec, egestas non
-                                                nisi. Nulla porttitor accumsan
-                                                tincidunt.
+                                                {{data.profile.about_me}}
                                             </p>
-                                            <p class="lead">
+                                            <!-- <p class="lead">
                                                 Mauris blandit aliquet elit,
                                                 eget tincidunt nibh pulvinar a.
                                                 Vivamus suscipit tortor eget
@@ -305,7 +264,7 @@
                                                 accumsan tincidunt. Mauris
                                                 blandit aliquet elit, eget
                                                 tincidunt nibh pulvinar a.
-                                            </p>
+                                            </p> -->
                                         </div>
                                     </div>
                                 </div>
