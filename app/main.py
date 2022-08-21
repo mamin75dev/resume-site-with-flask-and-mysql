@@ -70,5 +70,15 @@ def main():
     # return render_template("index.html")
 
 
+@app.route('/portfolio-details')
+def portfolio_details():
+    return render_template("portfolio-details.html")
+
+
+@app.route('/blog-single')
+def blog_single():
+    return render_template("blog-single.html")
+
+
 if __name__ == "__main__":
     app.run("0.0.0.0", 5050, debug=True)
