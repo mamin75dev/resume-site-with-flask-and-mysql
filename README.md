@@ -1,7 +1,5 @@
 # resume-site-with-flask-and-mysql
 
-jadi course with flask
-
 ## TODOS
 
 - [x] add requirements.txt file for packages
