@@ -29,8 +29,8 @@ class Service:
         result = cur.fetchall()
         for row in result:
             service = Service()
-            service.set_title(row[1])
-            service.set_logo(row[2])
-            service.set_point(row[3])
+            service.set_icon(row[1])
+            service.set_title(row[2])
+            service.set_description(row[3])
             services.append(service)
         return services

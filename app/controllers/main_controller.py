@@ -1,4 +1,5 @@
 from flask import render_template
+from models.service import Service
 from models.profile import Profile
 from models.experience import Experience
 from models.education import Education
@@ -13,6 +14,7 @@ class MainController:
         experiences = Experience.get_expriences_from_db()
         educations = Education.get_educations_from_db()
         skills = Skill.get_skills_from_db()
+        services = Service.get_services_from_db()
         return render_template("index.html",
                                data={"profile": profile, "experiences": experiences,
-                                     "educations": educations, "skills": skills})
+                                     "educations": educations, "skills": skills, "services": services})
