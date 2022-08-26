@@ -1,83 +1,24 @@
-from flask import Flask, render_template
-import MySQLdb
-import config
-from models.profile import Profile
-from models.experience import Experience
-from models.education import Education
-from models.skill import Skill
+from flask import Flask
+from controllers.blog_controller import BlogController
+from controllers.main_controller import MainController
+from controllers.portfolio_controller import PortfolioController
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def main():
-    db = MySQLdb.connect(host=config.DB_HOST, user=config.DB_USER,
-                         passwd=config.DB_PASS, db=config.DB_NAME)
+    return MainController.main()
 
-    cur = db.cursor()
-    len = cur.execute("SELECT * FROM personal ORDER BY id DESC LIMIT 1")
-    if (len < 1):
-        return ("404.html")  # TODO: add 404 file to templates
-    result = cur.fetchone()
-    print(result)
-    profile = Profile()
-    profile.create_data(
-        result[1],
-        result[2],
-        result[3],
-        result[4],
-        result[5],
-        result[6],
-        result[7],
-        result[8],
-        result[9],
-        result[10],
-        result[11],
-        result[12]
-    )
 
-    len = cur.execute("SELECT * FROM experiences ORDER BY id ASC")
-    result = cur.fetchall()
-
-    expriences = []
-
-    for r in result:
-        exp = Experience()
-        exp.create_data(r[1], r[2], r[3], r[4], r[5], r[6])
-        expriences.append(exp)
-
-    len = cur.execute("SELECT * FROM educations ORDER BY id ASC")
-    result = cur.fetchall()
-
-    educations = []
-
-    for r in result:
-        edu = Education()
-        edu.create_data(r[1], r[2], r[3], r[4], r[5], r[6])
-        educations.append(edu)
-
-    len = cur.execute("SELECT * FROM skills ORDER BY point DESC")
-    result = cur.fetchall()
-
-    skills = []
-
-    for r in result:
-        skill = Skill()
-        skill.create_data(r[1], r[2], r[3])
-        skills.append(skill)
-
-    return render_template("index.html", data={"profile": profile, "experiences": expriences, "educations": educations, "skills": skills})
-    # return render_template("index.html")
+@app.route('/blog-single')
+def bolg_single():
+    return BlogController.blog_single()
 
 
 @app.route('/portfolio-details')
 def portfolio_details():
-    return render_template("portfolio-details.html")
-
-
-@app.route('/blog-single')
-def blog_single():
-    return render_template("blog-single.html")
+    return PortfolioController.portfolio_details()
 
 
 if __name__ == "__main__":
